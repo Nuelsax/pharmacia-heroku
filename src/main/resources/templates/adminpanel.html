@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phamacia Admin</title>
+    <link rel="stylesheet"th:href="@{/css/adminpanel.css}">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+</head>
+<body>
+    <input type="checkbox" name="" id="nav-toggle">
+ <div class="sidebar">
+     <div class="sidebar-brand">
+         <h2><span class="lab la-accusoft"></span> <span>Pharmacia</span> </h2>
+     </div>
+     <div class="sidebar-menu">
+         <ul>
+             <li>
+                 <a href="" class="active"><span class="las la-igloo"></span><span>Dashboard</span></a>
+                </li>
+             <li>
+                 <a href=""><span class="las la-users"></span><span>Bookings</span></a>
+                </li>
+             <li>
+                 <a href=""><span class="las la-clipboard-list"></span><span>Customers</span></a>
+                </li>
+             <li>
+                 <a  th:href="@{/blog}"><span class="las la-shipping-bag"></span><span>Posts</span></a>
+                </li>
+             <li>
+                 <a href=""><span class="las la-receiptt"></span><span>Phamarcists</span></a>
+                </li>
+             <li>
+                 <a href=""><span class="las la-user-circle"></span><span>Accounts</span></a>
+                </li>
+             <li>
+                 <a href=""><span class="las la-clipboard-list"></span><span>Products</span></a>
+                </li>
+         </ul>
+     </div>
+ </div>
+
+  <div class="main-content">
+      <header>
+         <h2>
+            <label for="nav-toggle">
+                <span class="las la-bars"></span>
+            </label>
+            Dashboard
+         </h2>
+         <div class="search-wrapper">
+             <span class="las la-search"></span>
+             <input type="search" name="" id="" placeholder="search here">
+         </div>
+         <div class="user-wrapper">
+             <img th:src="@{/smage/doc-4.jpg}" width="30px" height="30px" alt="">
+             <div>
+                 <h4>John Doe</h4>
+                 <small>Super Admin</small>
+             </div>
+         </div>
+      </header> 
+
+      <main>
+          <div class="cards">
+              <div class="card-single">
+                  <div th:object="${totalUsers}">
+                      <h1 th:text="${totalUsers.getTotalUsers()}"></h1>
+                      <span>Customers</span>
+                      <div>
+                          <span class="la la-users"></span>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-single" th:object="${totalbooking}">
+                  <div>
+                      <h1 th:text="${totalbooking.getTotalBookings()}"></h1>
+                      <span>Pending Reviews</span>
+                      <div>
+                          <span class="la la-clipboard"></span>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-single">
+                  <div>
+                      <h1>124</h1>
+                      <span>Orders</span>
+                      <div>
+                          <span class="la la-shopping-bag"></span>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-single">
+                  <div>
+                      <h1>$6K</h1>
+                      <span>Income</span>
+                      <div>
+                          <span class="lab la-google-wallet"></span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+          <div class="recent-grid">
+            <div class="projects">
+               <div class="card">
+                   <div class="card-header">
+                        <h2>Recent Bookings</h2>
+                        <button> See all <span class="las la-arrow-right"></span></button>
+                   </div>
+
+
+
+                   <div class="card-body" >
+                      <div class="table-responsive">
+                        <table width="100%">
+
+                            <thead>
+                                <tr>
+                                    <td>Client Name</td>
+                                    <td>Message</td>
+                                    <td>Status</td>
+                                </tr>
+                            </thead>
+                            <div th:each="books : ${listofBooking}">
+                            <tbody>
+                                <tr>
+                                    <td th:text="${books.name}"></td>
+                                    <td th:text="${books.message}"></td>
+                                    <td>
+                                        <span class="status purple">
+                                        
+                                        </span>
+                                        review
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                            </div>
+
+
+                       </table>
+                      </div>
+                   </div>
+
+
+               </div>
+            </div>
+            <div class="customers">
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h3>New customer</h3>
+                        <button> See all <span class="las la-arrow-right"></span></button>
+                    </div>
+                        <div class="card-body">
+                            <div th:each="users : ${listofUsers}">
+                            <div class="customer">
+                               <div class="info">
+                                <img th:src="@{/smage/doc-4.jpg}"width="40px" height="40px" alt="">
+                                <div>
+                                    <h4 th:text="*{users.getFirstName()}"></h4>
+                                    <small>Customer</small>
+                                </div>
+                               </div>
+                               <div class="contact">
+                                <span class="las la-user-circle"></span>
+                                <span class="las la-comment"></span>
+                                <span class="las la-phone"></span>
+                            </div>
+                            </div>
+                            </div>
+                           
+                        </div>
+
+                    
+                </div>
+            </div>
+
+          </div>
+      </main>
+  </div>
+</body>
+</html>
